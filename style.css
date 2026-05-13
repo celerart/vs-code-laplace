@@ -499,20 +499,10 @@ body {
 .sim-btn.play-again       { background: #F4C7B8; color: #2e1a14; }
 .sim-btn.play-again:hover { background: #F2B4A0; }
 
-/* в”Ђв”Ђ Terminal Animation в”Ђв”Ђ */
-@keyframes terminalLine {
-  0%   { opacity: 0; transform: translateY(-6px); background-color: rgba(78, 201, 176, 0.12); }
-  30%  { opacity: 1; background-color: rgba(78, 201, 176, 0.04); }
-  100% { opacity: 1; transform: translateY(0);   background-color: transparent; }
-}
-
+/* в”Ђв”Ђ Spinner в”Ђв”Ђ */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
-.t-hidden  { opacity: 0 !important; }
-.t-reveal  { animation: terminalLine 0.22s ease-out forwards; }
-
 .run-spinner {
   animation: spin 0.65s linear infinite;
   transform-origin: 50% 50%;

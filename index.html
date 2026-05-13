@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="style.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>scratch.ipynb — atlas-workspace</title>
-
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -119,11 +118,11 @@
       <div class="cell active">
         <div class="cell-input">
           <div class="cell-gutter">
-            <button class="run-btn">
+            <button id="run-btn-0" class="run-btn run-btn--interactive">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
-              <span class="run-badge">3</span>
+
             </button>
-            <div class="cell-exec-time">1.2s</div>
+            <div class="cell-exec-time"></div>
           </div>
           <div class="cell-content">
             <span class="cell-lang">Python</span>
@@ -216,9 +215,9 @@
           <div class="cell-gutter">
             <button class="run-btn">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
-              <span class="run-badge">3</span>
+
             </button>
-            <div class="cell-exec-time">3.8s</div>
+            <div class="cell-exec-time"></div>
           </div>
           <div class="cell-content">
             <span class="cell-lang">Python</span>
@@ -315,9 +314,9 @@ you have an empty df with no images in the VA cohort
           <div class="cell-gutter">
             <button class="run-btn">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
-              <span class="run-badge">3</span>
+
             </button>
-            <div class="cell-exec-time">12.4s</div>
+            <div class="cell-exec-time"></div>
           </div>
           <div class="cell-content">
             <span class="cell-lang">Python</span>
@@ -375,7 +374,7 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
       </div>
 
       <!-- Bottom padding -->
-      <div style="height:100px;"></div>
+      <div style="height:16px;"></div>
 
     </div>
   </div>
@@ -412,5 +411,106 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
 // Image used instead of canvas
 </script>
 
+
+<button id="sim-btn" class="sim-btn">Run Full Simulation</button>
+
+<script>
+(function () {
+  'use strict';
+  var cells    = document.querySelectorAll('.cell');
+  var mainBtn  = document.getElementById('run-btn-0');
+  var simBtn   = document.getElementById('sim-btn');
+  var scroller = document.querySelector('.notebook-scroll');
+  var running  = false;
+
+  function scrollBottom() {
+    if (scroller) scroller.scrollTop = scroller.scrollHeight;
+  }
+
+  var PLAY = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>';
+  var SPIN = '<svg class="run-spinner" viewBox="0 0 16 16" fill="none" stroke="#cca700" stroke-width="1.8"><circle cx="8" cy="8" r="5.5" stroke-dasharray="22 12" stroke-linecap="round"/></svg>';
+  var WAIT = [1400, 1700, 1300];
+
+  function reset() {
+    cells.forEach(function (cell) {
+      var out = cell.querySelector('.cell-output');
+      var btn = cell.querySelector('.run-btn');
+      var t   = cell.querySelector('.cell-exec-time');
+      if (out) out.style.display = 'none';
+      if (btn) { btn.innerHTML = PLAY; btn.style.color = ''; }
+      if (t)   t.textContent = '';
+    });
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    simBtn.disabled = true;
+    simBtn.className = 'sim-btn';
+    simBtn.textContent = 'Run Full Simulation';
+    reset();
+    step(0, function () {
+      step(1, function () {
+        step(2, function () {
+          running = false;
+          simBtn.disabled = false;
+          simBtn.textContent = 'Play Again';
+          simBtn.className = 'sim-btn play-again';
+        });
+      });
+    });
+  }
+
+  var EXEC_LABELS = ['1.2s', '3.8s', '12.4s'];
+
+  function step(i, cb) {
+    var cell = cells[i];
+    var btn  = cell && cell.querySelector('.run-btn');
+    var out  = cell && cell.querySelector('.cell-output');
+    var t    = cell && cell.querySelector('.cell-exec-time');
+
+    if (btn) btn.innerHTML = SPIN;
+
+    setTimeout(function () {
+      if (btn) btn.innerHTML = PLAY + '<span class="run-badge">' + (i + 1) + '</span>';
+      if (t)   t.textContent = EXEC_LABELS[i];
+
+      if (!out) { cb(); return; }
+
+      /* Collect terminal reveal targets */
+      var items = [];
+      out.querySelectorAll('.well-tabs').forEach(function (el) { items.push(el); });
+      out.querySelectorAll('thead').forEach(function (el) { items.push(el); });
+      out.querySelectorAll('tbody tr').forEach(function (el) { items.push(el); });
+      out.querySelectorAll('.output-image-wrap').forEach(function (el) { items.push(el); });
+      out.querySelectorAll('.output-text, .output-error').forEach(function (el) { items.push(el); });
+      out.querySelectorAll('.quota-bar').forEach(function (el) { items.push(el); });
+
+      /* Pre-hide, then make parent visible */
+      items.forEach(function (el) { el.classList.add('t-hidden'); });
+      out.style.display = 'block';
+      scrollBottom();
+
+      requestAnimationFrame(function () {
+        var STEP = 115;
+        items.forEach(function (el, j) {
+          setTimeout(function () {
+            el.classList.remove('t-hidden');
+            el.classList.add('t-reveal');
+            el.addEventListener('animationend', function () {
+              el.classList.remove('t-reveal');
+            }, { once: true });
+            scrollBottom();
+          }, j * STEP);
+        });
+        setTimeout(cb, items.length * STEP + 320);
+      });
+    }, WAIT[i]);
+  }
+
+  if (mainBtn) mainBtn.addEventListener('click', start);
+  if (simBtn)  simBtn.addEventListener('click', start);
+}());
+</script>
 </body>
 </html>

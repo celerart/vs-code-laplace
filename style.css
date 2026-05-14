@@ -366,7 +366,7 @@ body {
 }
 .quota-bar a    { color: var(--vsc-link, #4e94ce); cursor: default; text-decoration: underline; text-decoration-style: dotted; }
 .quota-track    { width: 80px; height: 4px; background: #2a2a4a; border-radius: 2px; overflow: hidden; flex-shrink: 0; }
-.quota-fill     { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #4e6ae6, #7c4dff); }
+.quota-fill     { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #4e6ae6, #7c4dff); transform-origin: left center; }
 .quota-text     { color: #6666aa; font-size: 10px; white-space: nowrap; }
 
 /* в”Ђв”Ђ Kernel Tabs в”Ђв”Ђ */
@@ -515,4 +515,8 @@ body {
   .activitybar   { width: 32px; }
   .activity-icon { width: 32px; height: 32px; }
   .activity-icon svg { width: 16px; height: 16px; }
+
+  /* Cell 2: РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ СЃРїР»РёС‚ в†’ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ */
+  .kernel-tabs-row                          { flex-direction: column; }
+  .kernel-tab-well + .kernel-tab-well       { border-left: none; border-top: 2px solid var(--vsc-border); }
 }

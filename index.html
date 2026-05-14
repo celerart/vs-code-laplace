@@ -437,6 +437,10 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
     out.querySelectorAll(REVEAL_SEL).forEach(function (el) {
       el.style.cssText = '';
     });
+    out.querySelectorAll('.quota-fill').forEach(function (fill) {
+      fill.style.transition = '';
+      fill.style.transform  = '';
+    });
   }
 
   function reset() {
@@ -500,6 +504,11 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
         el.style.transform  = 'translateY(-7px)';
         el.style.transition = 'none';
         el.style.backgroundColor = 'rgba(78,201,176,0.1)';
+        /* Сбросить quota fill в scaleX(0) */
+        el.querySelectorAll('.quota-fill').forEach(function (fill) {
+          fill.style.transition = 'none';
+          fill.style.transform  = 'scaleX(0)';
+        });
       });
 
       out.style.display = 'block';
@@ -516,6 +525,17 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
               el.style.opacity         = '1';
               el.style.transform       = 'translateY(0)';
               el.style.backgroundColor = 'transparent';
+              /* Анимация quota fill: появляется после бара */
+              var fills = el.querySelectorAll('.quota-fill');
+              if (fills.length) {
+                setTimeout(function () {
+                  fills.forEach(function (fill) {
+                    fill.getBoundingClientRect();
+                    fill.style.transition = 'transform 0.75s ease-out';
+                    fill.style.transform  = 'scaleX(1)';
+                  });
+                }, 220);
+              }
               scrollBottom();
             }, j * STEP);
           });

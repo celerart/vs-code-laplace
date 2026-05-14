@@ -29,7 +29,7 @@
   --vsc-param: #9cdcfe;
   --vsc-blue: #007acc;
   --vsc-blue-btn: #0e639c;
-  --vsc-statusbar: #007acc;
+  --vsc-statusbar: #111111;
   --vsc-cell-border: #40a0ff;
   --vsc-cell-inactive: #474747;
   --vsc-error: #f14c4c;
@@ -53,7 +53,7 @@ body {
   flex-direction: column;
 }
 
-/* в”Ђв”Ђ Title Bar в”Ђв”Ђ */
+/* ── Title Bar ── */
 .titlebar {
   background: var(--vsc-tab-bg);
   height: 30px;
@@ -77,10 +77,10 @@ body {
 .tl-min   { background: #febc2e; }
 .tl-max   { background: #28c840; }
 
-/* в”Ђв”Ђ Main Layout в”Ђв”Ђ */
+/* ── Main Layout ── */
 .main-layout { display: flex; flex: 1; overflow: hidden; }
 
-/* в”Ђв”Ђ Activity Bar в”Ђв”Ђ */
+/* ── Activity Bar ── */
 .activitybar {
   width: 48px;
   background: var(--vsc-activitybar);
@@ -109,7 +109,7 @@ body {
 }
 .activity-icon svg { width: 24px; height: 24px; }
 
-/* в”Ђв”Ђ Sidebar в”Ђв”Ђ */
+/* ── Sidebar ── */
 .sidebar {
   width: 180px;
   background: var(--vsc-sidebar);
@@ -146,7 +146,7 @@ body {
 .file-icon-folder { color: #c09553; }
 .file-icon-nb     { color: var(--vsc-green); }
 
-/* в”Ђв”Ђ Editor Area в”Ђв”Ђ */
+/* ── Editor Area ── */
 .editor-area {
   flex: 1;
   display: flex;
@@ -155,7 +155,7 @@ body {
   min-width: 0;
 }
 
-/* в”Ђв”Ђ Editor Tabs в”Ђв”Ђ */
+/* ── Editor Tabs ── */
 .editor-tabs {
   display: flex;
   background: var(--vsc-tab-bg);
@@ -185,7 +185,7 @@ body {
 .tab-icon  { font-size: 14px; }
 .tab-close { font-size: 14px; color: transparent; margin-left: 4px; }
 
-/* в”Ђв”Ђ Notebook Toolbar в”Ђв”Ђ */
+/* ── Notebook Toolbar ── */
 .notebook-toolbar {
   display: flex;
   align-items: center;
@@ -222,13 +222,13 @@ body {
 .kernel-dot  { width: 8px; height: 8px; border-radius: 50%; background: var(--vsc-green-chk); }
 .kernel-name { color: var(--vsc-text); }
 
-/* в”Ђв”Ђ Notebook Scroll в”Ђв”Ђ */
+/* ── Notebook Scroll ── */
 .notebook-scroll { flex: 1; overflow-y: auto; padding: 8px 0 38px; }
 .notebook-scroll::-webkit-scrollbar       { width: 10px; }
 .notebook-scroll::-webkit-scrollbar-track { background: transparent; }
 .notebook-scroll::-webkit-scrollbar-thumb { background: var(--vsc-scrollbar); border-radius: 5px; }
 
-/* в”Ђв”Ђ Cell в”Ђв”Ђ */
+/* ── Cell ── */
 .cell { margin: 4px 48px 4px 16px; position: relative; }
 .cell-input   { display: flex; position: relative; }
 .cell-gutter  {
@@ -285,7 +285,7 @@ body {
   z-index: 1;
 }
 
-/* в”Ђв”Ђ Code Block в”Ђв”Ђ */
+/* ── Code Block ── */
 .code-block {
   background: #1e1e1e;
   padding: 8px 0;
@@ -312,7 +312,7 @@ body {
 .par { color: var(--vsc-param);    }
 .wht { color: #d4d4d4;             }
 
-/* в”Ђв”Ђ Cell Output вЂ” hidden by default в”Ђв”Ђ */
+/* ── Cell Output — hidden by default ── */
 .cell-output {
   display: none;
   margin: 0 0 0 36px;
@@ -323,7 +323,7 @@ body {
   overflow: hidden;
 }
 
-/* в”Ђв”Ђ Output Table в”Ђв”Ђ */
+/* ── Output Table ── */
 .output-table-wrap { overflow-x: auto; padding: 8px 12px; }
 .output-table {
   border-collapse: collapse;
@@ -352,7 +352,7 @@ body {
 .output-table tr:last-child td { border-bottom: none; }
 .row-idx { color: var(--vsc-text-muted); font-weight: 600; width: 30px; }
 
-/* в”Ђв”Ђ Quota Bar в”Ђв”Ђ */
+/* ── Quota Bar ── */
 .quota-bar {
   display: flex;
   align-items: center;
@@ -369,7 +369,7 @@ body {
 .quota-fill     { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #4e6ae6, #7c4dff); transform-origin: left center; }
 .quota-text     { color: #6666aa; font-size: 10px; white-space: nowrap; }
 
-/* в”Ђв”Ђ Kernel Tabs в”Ђв”Ђ */
+/* ── Kernel Tabs ── */
 .kernel-tabs-section { border-top: 1px solid var(--vsc-border-subtle); background: #181818; }
 .kernel-tabs-row     { display: flex; background: #181818; }
 .kernel-tab-well     { flex: 1; min-width: 0; }
@@ -395,7 +395,7 @@ body {
 
 .well-content { padding: 0; min-height: 20px; }
 
-/* в”Ђв”Ђ Output Text в”Ђв”Ђ */
+/* ── Output Text ── */
 .output-text {
   padding: 8px 12px;
   font-family: 'Fira Code', monospace;
@@ -414,7 +414,7 @@ body {
   background: rgba(244,76,76,0.06);
 }
 
-/* в”Ђв”Ђ Image output в”Ђв”Ђ */
+/* ── Image output ── */
 .output-image-wrap { padding: 8px 12px; display: flex; justify-content: flex-start; }
 .matplotlib-fig    { position: relative; width: 280px; height: 220px; background: #fff; border: 1px solid #555; }
 .mpl-canvas        { position: absolute; top: 30px; left: 50px; width: 200px; height: 160px; }
@@ -423,7 +423,7 @@ body {
 .mpl-xticks { bottom: 14px; left: 50px; width: 200px; display: flex; justify-content: space-between; }
 .mpl-yticks { left: 22px; top: 30px; height: 160px; display: flex; flex-direction: column; justify-content: space-between; text-align: right; }
 
-/* в”Ђв”Ђ Info log в”Ђв”Ђ */
+/* ── Info log ── */
 .info-log {
   padding: 5px 12px;
   font-size: 11px;
@@ -437,7 +437,7 @@ body {
 }
 .info-log .info-icon { flex-shrink: 0; margin-top: 1px; }
 
-/* в”Ђв”Ђ Status Bar в”Ђв”Ђ */
+/* ── Status Bar ── */
 .statusbar {
   height: 22px;
   background: var(--vsc-statusbar);
@@ -452,7 +452,7 @@ body {
 .statusbar-right { margin-left: auto; display: flex; gap: 14px; }
 .sb-item { display: flex; align-items: center; gap: 4px; font-size: 11px; cursor: default; }
 
-/* в”Ђв”Ђ Breadcrumb в”Ђв”Ђ */
+/* ── Breadcrumb ── */
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -475,7 +475,7 @@ body {
 
 .link { color: #4e94ce; cursor: default; }
 
-/* в”Ђв”Ђ Simulation Button в”Ђв”Ђ */
+/* ── Simulation Button ── */
 .sim-btn {
   position: fixed;
   bottom: 30px;
@@ -495,11 +495,8 @@ body {
   transition: background 0.15s ease;
 }
 .sim-btn:hover            { background: #98BEB0; }
-.sim-btn:disabled         { opacity: 0.55; cursor: default; pointer-events: none; }
-.sim-btn.play-again       { background: #F4C7B8; color: #2e1a14; }
-.sim-btn.play-again:hover { background: #F2B4A0; }
 
-/* в”Ђв”Ђ Spinner в”Ђв”Ђ */
+/* ── Spinner ── */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
@@ -508,7 +505,22 @@ body {
   transform-origin: 50% 50%;
 }
 
-/* в”Ђв”Ђ Mobile в”Ђв”Ђ */
+/* ── Button glow pulse ── */
+@keyframes runBtnGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(115, 201, 145, 0); }
+  50%       { box-shadow: 0 0 0 5px rgba(115, 201, 145, 0.38); }
+}
+@keyframes simBtnGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(152, 190, 176, 0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(152, 190, 176, 0.55); }
+}
+.run-btn--interactive            { animation: runBtnGlow 2.4s ease-in-out infinite; }
+.sim-btn                         { animation: simBtnGlow 2.4s ease-in-out infinite; }
+.sim-btn:disabled                { animation: none; opacity: 0.55; cursor: default; pointer-events: none; }
+.sim-btn.play-again              { animation: simBtnGlow 2.4s ease-in-out infinite; background: #F4C7B8; color: #2e1a14; }
+.sim-btn.play-again:hover        { background: #F2B4A0; }
+
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .sidebar       { display: none; }
   .cell          { margin-right: 16px; margin-left: 8px; }
@@ -516,7 +528,15 @@ body {
   .activity-icon { width: 32px; height: 32px; }
   .activity-icon svg { width: 16px; height: 16px; }
 
-  /* Cell 2: РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹Р№ СЃРїР»РёС‚ в†’ РІРµСЂС‚РёРєР°Р»СЊРЅС‹Р№ */
+  /* Cell 2: горизонтальный сплит → вертикальный */
   .kernel-tabs-row                          { flex-direction: column; }
   .kernel-tab-well + .kernel-tab-well       { border-left: none; border-top: 2px solid var(--vsc-border); }
+}
+
+/* ── Very small screens (<479px) ── */
+@media (max-width: 479px) {
+  .editor-tab:not(.active) { display: none; }   /* убрать README таб */
+  .kernel-selector          { display: none; }   /* убрать Atlas Federation */
+  .statusbar                { display: none; }   /* убрать нижнюю полоску */
+  .titlebar                 { font-size: 9px; letter-spacing: -0.2px; } /* компактнее заголовок */
 }

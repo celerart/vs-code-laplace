@@ -484,6 +484,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  white-space: nowrap;
   background: #C9E2D9;
   border: none;
   border-radius: 0;
@@ -498,6 +499,7 @@ body {
   transition: background 0.15s ease;
 }
 .sim-btn:hover            { background: #98BEB0; }
+.sim-btn svg              { flex-shrink: 0; display: block; }
 
 /* ── Spinner ── */
 @keyframes spin {

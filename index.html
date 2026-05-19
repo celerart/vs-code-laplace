@@ -426,6 +426,11 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
   var SPIN = '<svg class="run-spinner" viewBox="0 0 16 16" fill="none" stroke="#cca700" stroke-width="1.8"><circle cx="8" cy="8" r="5.5" stroke-dasharray="22 12" stroke-linecap="round"/></svg>';
   var WAIT = [1400, 1700, 1300];
 
+  var ICON_SIM   = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.2593 7.57314L5.26073 2.07385C5.18494 2.02753 5.09817 2.00224 5.00936 2.00058C4.92055 1.99891 4.8329 2.02094 4.75542 2.06439C4.67795 2.10784 4.61345 2.17114 4.56856 2.24779C4.52366 2.32444 4.5 2.41166 4.5 2.50049V13.4991C4.5 13.5879 4.52366 13.6751 4.56856 13.7518C4.61345 13.8284 4.67795 13.8917 4.75542 13.9352C4.8329 13.9786 4.92055 14.0006 5.00936 13.999C5.09817 13.9973 5.18494 13.972 5.26073 13.9257L14.2593 8.42641C14.3324 8.38175 14.3927 8.31906 14.4346 8.24435C14.4765 8.16965 14.4985 8.08543 14.4985 7.99978C14.4985 7.91412 14.4765 7.82991 14.4346 7.7552C14.3927 7.6805 14.3324 7.61781 14.2593 7.57314Z" fill="#101010"/></svg>';
+  var ICON_AGAIN = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L2 10.5L5 13.5" stroke="#1D1D1D" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 3.5H10.5C11.4283 3.5 12.3185 3.86875 12.9749 4.52513C13.6313 5.1815 14 6.07174 14 7V7.00001C14 7.45963 13.9095 7.91476 13.7336 8.3394C13.5577 8.76404 12.2999 9.14987 12.9749 9.47488C12.6499 9.79988 12.264 10.0577 11.8394 10.2336C11.4148 10.4095 10.9596 10.5 10.5 10.5H2" stroke="#1D1D1D" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  var cellDone = [false, false, false];
+
   var REVEAL_SEL = '.well-tabs, thead, tbody tr, .output-image-wrap, .output-text, .output-error, .quota-bar';
 
   function clearStyles(out) {
@@ -438,7 +443,16 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
     });
   }
 
+  function checkAllDone() {
+    if (!running && cellDone[0] && cellDone[1] && cellDone[2]) {
+      simBtn.disabled = false;
+      simBtn.innerHTML   = 'Play Again' + ICON_AGAIN;
+      simBtn.className   = 'sim-btn play-again';
+    }
+  }
+
   function reset() {
+    cellDone = [false, false, false];
     cells.forEach(function (cell) {
       var out = cell.querySelector('.cell-output');
       var btn = cell.querySelector('.run-btn');
@@ -452,16 +466,19 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
   function start() {
     if (running) return;
     running = true;
-    simBtn.disabled = true;
+    simBtn.disabled  = true;
     simBtn.className = 'sim-btn';
-    simBtn.textContent = 'Run Full Simulation';
+    simBtn.innerHTML = 'Run Full Simulation' + ICON_SIM;
     reset();
     step(0, function () {
+      cellDone[0] = true;
       step(1, function () {
+        cellDone[1] = true;
         step(2, function () {
+          cellDone[2] = true;
           running = false;
-          simBtn.disabled = false;
-          simBtn.textContent = 'Play Again';
+          simBtn.disabled  = false;
+          simBtn.innerHTML = 'Play Again' + ICON_AGAIN;
           simBtn.className = 'sim-btn play-again';
         });
       });
@@ -544,6 +561,7 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
   function runCell(i) {
     if (running || cellRunning[i]) return;
     cellRunning[i] = true;
+    cellDone[i]    = false;
     var cell = cells[i];
     var out  = cell.querySelector('.cell-output');
     var btn  = cell.querySelector('.run-btn');
@@ -551,8 +569,15 @@ Request made: <a href="#" class="link">https://github.com/atlas-hub/ouwen-file-t
     if (out) { clearStyles(out); out.style.display = 'none'; }
     if (btn) { btn.innerHTML = PLAY; btn.style.color = ''; }
     if (t)   t.textContent = '';
-    step(i, function () { cellRunning[i] = false; });
+    step(i, function () {
+      cellRunning[i] = false;
+      cellDone[i]    = true;
+      checkAllDone();
+    });
   }
+
+  /* Начальный вид sim-btn с иконкой */
+  if (simBtn) simBtn.innerHTML = 'Run Full Simulation' + ICON_SIM;
 
   /* Привязываем все три кнопки play */
   [0, 1, 2].forEach(function (i) {

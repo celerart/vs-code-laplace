@@ -481,6 +481,9 @@ body {
   bottom: 30px;
   right: 16px;
   padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   background: #C9E2D9;
   border: none;
   border-radius: 0;
@@ -514,10 +517,14 @@ body {
   0%, 100% { box-shadow: 0 0 0 0 rgba(152, 190, 176, 0); }
   50%       { box-shadow: 0 0 10px 3px rgba(152, 190, 176, 0.55); }
 }
+@keyframes playAgainGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 199, 184, 0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(244, 199, 184, 0.7); }
+}
 .run-btn--interactive            { animation: runBtnGlow 2.4s ease-in-out infinite; }
 .sim-btn                         { animation: simBtnGlow 2.4s ease-in-out infinite; }
 .sim-btn:disabled                { animation: none; opacity: 0.55; cursor: default; pointer-events: none; }
-.sim-btn.play-again              { animation: simBtnGlow 2.4s ease-in-out infinite; background: #F4C7B8; color: #2e1a14; }
+.sim-btn.play-again              { animation: playAgainGlow 2.4s ease-in-out infinite; background: #F4C7B8; color: #2e1a14; border: 1px solid #fff; padding: 12px 20px 12px 24px; }
 .sim-btn.play-again:hover        { background: #F2B4A0; }
 
 /* ── Mobile ── */
